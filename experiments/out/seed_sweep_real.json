@@ -1,0 +1,81 @@
+{
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "notes": 24371,
+  "notes_with_enough_ratings": 24371,
+  "final_losses": [
+    0.09029489802121808,
+    0.0893467179012785,
+    0.09255740974219825,
+    0.09102038054478162,
+    0.0893622262120293,
+    0.09165822294440627,
+    0.09030398488208377,
+    0.08941402916418614,
+    0.09177924291790805,
+    0.09092699379559437
+  ],
+  "loss_spread": 0.003210691840919752,
+  "unstable_notes": 708,
+  "unstable_fraction": 0.029050921176808502,
+  "helpful_in_any_seed": 1066,
+  "helpful_in_every_seed": 598,
+  "intercept_std_median": 0.0041249223930105074,
+  "intercept_std_p95": 0.03644686995205838,
+  "by_rating_count": [
+    {
+      "ratings_from": 5,
+      "ratings_below": 10,
+      "notes": 6544,
+      "unstable_fraction": 0.011919315403422982,
+      "intercept_std_median": 0.002246249699728164
+    },
+    {
+      "ratings_from": 10,
+      "ratings_below": 20,
+      "notes": 6104,
+      "unstable_fraction": 0.015235910878112713,
+      "intercept_std_median": 0.0033300899495569917
+    },
+    {
+      "ratings_from": 20,
+      "ratings_below": 50,
+      "notes": 6006,
+      "unstable_fraction": 0.03463203463203463,
+      "intercept_std_median": 0.004540392713938123
+    },
+    {
+      "ratings_from": 50,
+      "ratings_below": 100,
+      "notes": 2858,
+      "unstable_fraction": 0.06333100069979006,
+      "intercept_std_median": 0.0062073178706842525
+    },
+    {
+      "ratings_from": 100,
+      "ratings_below": 200,
+      "notes": 1688,
+      "unstable_fraction": 0.05924170616113744,
+      "intercept_std_median": 0.006831937126703835
+    },
+    {
+      "ratings_from": 200,
+      "ratings_below": 1000000,
+      "notes": 1171,
+      "unstable_fraction": 0.04099060631938514,
+      "intercept_std_median": 0.007359299078461996
+    }
+  ],
+  "pairwise_status_agreement_mean": 0.988479932889272,
+  "pairwise_status_agreement_min": 0.9804275573427434
+}
