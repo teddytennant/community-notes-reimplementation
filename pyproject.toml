@@ -1,0 +1,12 @@
+[project]
+name = "community_notes"
+version = "0.1.0"
+description = "Community Notes note scoring, reimplemented from scratch in numpy"
+requires-python = ">=3.12"
+dependencies = ["numpy", "pandas", "pyarrow", "requests", "matplotlib"]
+
+[project.optional-dependencies]
+dev = ["pytest", "jax"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
