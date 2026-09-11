@@ -26,9 +26,9 @@ sparse to the real scorer.
 
 ## How much does the seed matter
 
-`seed_sweep.py` fits the same ratings under seeds 0 through 9. Every fit
-converges to about the same loss, spread 0.0032, so these are all good fits by
-the objective. The statuses still move.
+`seed_sweep.py` fits the same ratings under seeds 0 through 9. All ten stop on
+the 1e-7 tolerance within a few steps of each other, at losses spread over
+0.0032. The statuses still move.
 
 - 708 of 24,371 notes, 2.9%, get a different status depending on the seed.
 - 1,066 notes are Helpful under at least one seed. Only 598 are Helpful under
@@ -56,8 +56,43 @@ actually being contested, and a contested note sits near 0.40 where a small
 change in the fit decides the outcome. `out/intercept_vs_factor.png` shows the
 unstable notes clustered on the threshold line.
 
+This is variance in the procedure, not in the objective. See below before
+reading it as "the loss has many optima".
+
 Reproduce with:
 
     .venv/bin/python experiments/seed_sweep.py --seeds 10
 
 Plots and the raw per-seed intercepts land in `out/`.
+
+## The fits are not at a minimum
+
+Stopping on a tolerance is not the same as converging. `converge_check.py`
+turns the stopping rules off and runs seeds 0, 1 and 2 for 900 steps. The loss
+gets worse:
+
+| seed | at the first loss rise | at 900 steps |
+| --- | --- | --- |
+| 0 | 0.0903 | 0.0940 |
+| 1 | 0.0893 | 0.1019 |
+| 2 | 0.0926 | 0.0932 |
+
+Adam at the official learning rate of 1.0 flattens out around step 140, sits
+there, and then drifts upward. The first rise comes at step 184 to 360
+depending on the seed, which is why the official "stop if the loss rises after
+step 100" rule never fires before the tolerance does.
+
+So the seed sensitivity above is a property of the whole procedure, random
+init plus Adam plus that stopping rule, and not evidence that the objective
+has many equally good solutions. That is still the thing worth measuring,
+because a published note status is the output of exactly such a procedure.
+
+Running longer makes it worse rather than better. Over the same three seeds,
+unstable notes go from 1.5% at the first loss rise to 5.4% at 900 steps, and
+the Helpful count spreads from 648 on seed 0 to 1,486 on seed 1.
+
+None of this transfers to the production scorer without checking. It fits the
+full history in several warm-started rounds, and this is one cold round on two
+weeks.
+
+    .venv/bin/python experiments/converge_check.py 900
